@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+import os
+import netifaces
+import time
+import threading
+
+def main():
+    if os.geteuid() != 0:
+        exit('You should run as root')
+    print('sslsplit starting....')
+    os.system('sudo sslsplit -D -l ./tmp/connections.log -j ./tmp/sslsplit -S ./tmp/logdir -k certauth.key -c ca.crt ssl 0.0.0.0 9443 tcp 0.0.0.0 9080')
+
+if __name__ == '__main__':
+    main()
